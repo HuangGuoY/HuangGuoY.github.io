@@ -128,7 +128,6 @@ a:hover, a:active {
   list-style: none;
   padding: 18px 30px;
   float: left;
-  font-size: 12px;
 }
 .page-top .nav li {
   position: relative;
@@ -155,8 +154,8 @@ a:hover, a:active {
   float: right;
 }
 .page-top .information .avatar img {
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   border-radius: 300px;
 }
 .page-top .information .back_btn {
