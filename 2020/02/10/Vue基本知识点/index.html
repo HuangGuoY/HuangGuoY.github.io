@@ -1,0 +1,44 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="GuoY"><title>Vue基本知识点 · GuoY的博客</title><meta name="description" content="指令、动态属性v-cloak  防止闪烁
+v-on：监听DOM事件，可以简写成@
+v-model：使用在表单中，实现双向数据绑定的，在表单元素外使用不起作用
+v-bind：用来绑定数据和属性以及表达式，可以简写成：
+v-for：遍历数组，格式  v-for=”字段名 in(of) 数组json”（v"><meta name="keywords" content="Hexo,HTML,CSS,Vue"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/HuangGuoY.github.io/css/style.css"><link rel="stylesheet" href="/HuangGuoY.github.io/css/blog_basic.css"><link rel="stylesheet" href="/HuangGuoY.github.io/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><meta name="generator" content="Hexo 4.2.0"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/HuangGuoY.github.io/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">GuoY</a></h3></div></div><ul class="social-links"><li><a href="http://github.com/HuangGuoY" target="_blank" rel="noopener"><i class="fa fa-github fa-2x"></i></a></li></ul><div class="footer"><a target="_blank" href="/"><a href="https://github.com/Ben02/hexo-theme-Anatole" target="_blank" rel="noopener">主题： anatole</a></a><div class="by_farbox"><a href="https://hexo.io/zh-cn/" target="_blank">By Hexo&#65281;</a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">首页</a></li><li><a href="/about">关于</a></li><li><a href="/archives">归档</a></li><li><a href="/links">友链</a></li></div><div class="information"><div class="back_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li></div><div class="avatar"><img src="/images/logo.png"></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>Vue基本知识点</a></h3></div><div class="post-content"><h3 id="指令、动态属性"><a href="#指令、动态属性" class="headerlink" title="指令、动态属性"></a>指令、动态属性</h3><p>v-cloak  防止闪烁</p>
+<p>v-on：监听DOM事件，可以简写成@</p>
+<p>v-model：使用在表单中，实现双向数据绑定的，在表单元素外使用不起作用</p>
+<p>v-bind：用来绑定数据和属性以及表达式，可以简写成：</p>
+<p>v-for：遍历数组，格式  v-for=”字段名 in(of) 数组json”（<strong>v-for和v-if不能同时使用</strong>)</p>
+<p>v-if：判断并且通过display属性隐藏元素</p>
+<p>v-else-if 必须和v-if连用</p>
+<p>v-show：判断并且显示或隐藏dom元素</p>
+<p>v-text：原模原样输出</p>
+<p>v-html：会解析并且输出html，但是会有xss风险，会覆盖子组件</p>
+<h3 id="事件修饰符"><a href="#事件修饰符" class="headerlink" title="事件修饰符"></a>事件修饰符</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- .once 只执行一次点击 --&gt;</span><br><span class="line">&lt;a v-on:click.once &#x3D; &quot;doThis&quot;&gt;&lt;&#x2F;a&gt;</span><br><span class="line">&lt;!-- 阻止单击事件继续传播 --&gt;</span><br><span class="line">&lt;a v-on:click.stop &#x3D; &quot;doThis&quot;&gt;&lt;&#x2F;a&gt;</span><br><span class="line">&lt;!-- 提交事件不在重载页面 --&gt;</span><br><span class="line">&lt;form v-on:click.prevent &#x3D; &quot;onSumbit&quot;&gt;&lt;&#x2F;from&gt;</span><br><span class="line">&lt;!-- 串联使用 --&gt;</span><br><span class="line">&lt;a v-on:click.stop.prevent &#x3D; &quot;doThis&quot;&gt;&lt;&#x2F;a&gt;</span><br><span class="line">&lt;!-- .capture 捕获事件：嵌套两三层父子关系，然后所有都有点击事件 --&gt;</span><br><span class="line">&lt;div v-on:click.capture&#x3D;&quot;doThis&quot;&gt;...&lt;&#x2F;div&gt;</span><br><span class="line">&lt;!-- .self只会触发自己范围内的事件，不会包含子元素 --&gt;</span><br><span class="line">&lt;div class&#x3D;&quot;inner&quot; @click.self&#x3D;&quot;doThis&quot;&gt; ...&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--v-model.trim去除首尾的空格 --&gt;</span><br><span class="line">&lt;input type&#x3D;&quot;text&quot; v-model.trim&#x3D;&quot;name&quot; &#x2F;&gt;</span><br><span class="line">&lt;!--v-model.lazy输入完才会变化 --&gt;</span><br><span class="line">&lt;input type&#x3D;&quot;text&quot; v-model.lazy&#x3D;&quot;name&quot; &#x2F;&gt;</span><br><span class="line">&lt;!--v-model.number只能输入数字 --&gt;</span><br><span class="line">&lt;input type&#x3D;&quot;text&quot; v-model.number&#x3D;&quot;age&quot; &#x2F;&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="v-show和v-if的区别"><a href="#v-show和v-if的区别" class="headerlink" title="v-show和v-if的区别"></a>v-show和v-if的区别</h3><p><strong>v-show</strong></p>
+<ol>
+<li><p>v-show仅仅控制元素的显示方式，通过css里的display属性进行隐藏</p>
+</li>
+<li><p>当我们需要经常切换某个元素的显示/隐藏时，使用v-show性能更高</p>
+</li>
+</ol>
+<p><strong>v-if</strong></p>
+<ol>
+<li>v-if会控制这个DOM节点的存在与否 </li>
+<li>在次数很少改变时，则使用 v-if 较好</li>
+</ol>
+<h3 id="v-for中为什么要用key"><a href="#v-for中为什么要用key" class="headerlink" title="v-for中为什么要用key"></a>v-for中为什么要用key</h3><p>key来给每个节点做一个唯一标识，key不能乱写（如random或者index），应该是跟业务有关的key命名。</p>
+<h3 id="Vue组件如何通讯"><a href="#Vue组件如何通讯" class="headerlink" title="Vue组件如何通讯"></a>Vue组件如何通讯</h3><h3 id="组件渲染和更新的过程"><a href="#组件渲染和更新的过程" class="headerlink" title="组件渲染和更新的过程"></a>组件渲染和更新的过程</h3><h3 id="双向数据绑定v-model的实现原理"><a href="#双向数据绑定v-model的实现原理" class="headerlink" title="双向数据绑定v-model的实现原理"></a>双向数据绑定v-model的实现原理</h3><h3 id="computed和watch"><a href="#computed和watch" class="headerlink" title="computed和watch"></a>computed和watch</h3><ol>
+<li>computed有缓存，data不变则不会重新计算属性</li>
+</ol>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2020-02-10</span><i class="fa fa-tag"></i><a class="tag" href="/HuangGuoY.github.io/tags/Vue-js/" title="Vue.js">Vue.js </a></div></div></div></div><div class="share"><div class="weibo"><a class="fa fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a></div></div><div class="pagination"><ul class="clearfix"><li class="next pagbuttons"><a class="btn" role="navigation" href="/HuangGuoY.github.io/2020/01/11/%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/" title="跨域问题">下一篇</a></li></ul></div><a id="comments"></a><div id="vcomments" style="margin:0 30px;"></div><script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="//cdn.jsdelivr.net/gh/xcss/valine@v1.1.7/dist/Valine.min.js?v=undefined"></script><script>var valine = new Valine({
+  el:'#vcomments',
+  notify:false || false, 
+  verify:false|| false, 
+  app_id:'PPRuXariSpXVa4nqOGCIEOlr-gzGzoHsz',
+  app_key:'i0mUkt1SvpNNgt6DH4E09wgA',
+  placeholder:'请输入内容',
+  path: window.location.pathname,
+  avatar:'mm'
+})</script></div></div></div></div><script src="/HuangGuoY.github.io/js/jquery.js"></script><script src="/HuangGuoY.github.io/js/jquery-migrate-1.2.1.min.js"></script><script src="/HuangGuoY.github.io/js/jquery.appear.js"></script><script src="/HuangGuoY.github.io/js/love.js"></script></body></html>
