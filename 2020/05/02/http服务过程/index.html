@@ -1,0 +1,46 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="GuoY"><title>http服务过程 · GuoY的博客</title><meta name="description" content=""><meta name="keywords" content="Hexo,HTML,CSS,Vue"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/HuangGuoY.github.io/css/style.css"><link rel="stylesheet" href="/HuangGuoY.github.io/css/blog_basic.css"><link rel="stylesheet" href="/HuangGuoY.github.io/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><meta name="generator" content="Hexo 4.2.0"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/HuangGuoY.github.io/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">GuoY</a></h3></div></div><ul class="social-links"><li><a href="http://github.com/HuangGuoY" target="_blank" rel="noopener"><i class="fa fa-github fa-2x"></i></a></li></ul><div class="footer"><a target="_blank" href="/"><a href="https://github.com/Ben02/hexo-theme-Anatole" target="_blank" rel="noopener">主题： anatole</a></a><div class="by_farbox"><a href="https://hexo.io/zh-cn/" target="_blank">By Hexo&#65281;</a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">首页</a></li><li><a href="/about">关于</a></li><li><a href="/archives">归档</a></li><li><a href="/links">友链</a></li></div><div class="information"><div class="back_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li></div><div class="avatar"><img src="/images/logo.png"></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>http服务过程</a></h3></div><div class="post-content"><link rel="stylesheet noopener" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" target="_blank"><div class=".article-gallery" <h3 id="当我们在web服务器上输入一个地址www-xxx-com，具体过程是怎样的呢？"><a href="#当我们在web服务器上输入一个地址www-xxx-com，具体过程是怎样的呢？" class="headerlink" title="当我们在web服务器上输入一个地址www.xxx.com，具体过程是怎样的呢？"></a>当我们在web服务器上输入一个地址<a href="http://www.xxx.com，具体过程是怎样的呢？">www.xxx.com，具体过程是怎样的呢？</a><ol>
+<li>对<a href="http://www.xxx.com这个地址进行DNS域名解析，得到对应的IP地址" target="_blank" rel="noopener">www.xxx.com这个地址进行DNS域名解析，得到对应的IP地址</a></li>
+<li>根据这个IP，找到对应的服务器，发起TCP三次握手</li>
+<li>建立TCP连接后发起HTTP请求</li>
+<li>服务器响应HTTP请求，浏览器得到HTML代码</li>
+<li>浏览器解析HTML代码，并请求http代码中的资源（JS、CSS、图片等，顺序先是HTML代码再去找这些资源）</li>
+<li>浏览器对页面进行渲染呈现给客户端</li>
+<li>服务器关闭TCP连接</li>
+</ol>
+<p>注：</p>
+<ol>
+<li><p>DNS怎么找到域名</p>
+<p>DNS域名解析采用的是递归查找的方式，过程是，先去找DNS缓存，如果缓存找不到就去找根域名服务器，根域名又回去找下一级，这样递归查询，找到之后就把IP给到浏览器</p>
+</li>
+<li><p>为什么HTTP协议要基于TCP来实现</p>
+<p>TCP是一个端到端的可靠的面向连接的协议，HTTP基于传输层TCP协议不用担心数据传输的各种问题（发生错误时。会重传）</p>
+</li>
+<li><p>最后一步浏览器如何对页面进行渲染</p>
+<p>首先，解析html文件，生成DOM树</p>
+<p>齐次，解析CSS文件构成渲染树</p>
+<p>过程是边解析边渲染的过程，JS有可能修改DOM结构，意味着JS执行完成前，后续所有资源的下载是没有必要的，所以JS是单线程，会阻塞后续资源下载</p>
+</li>
+</ol>
+<h3 id="各个步骤的细节"><a href="#各个步骤的细节" class="headerlink" title="各个步骤的细节"></a>各个步骤的细节</h3><h4 id="DNS解析（域名解析服务器）"><a href="#DNS解析（域名解析服务器）" class="headerlink" title="DNS解析（域名解析服务器）"></a>DNS解析（域名解析服务器）</h4><ol>
+<li>首先会搜索浏览器自身的DNS缓存（缓存时间比较短，且只能容纳1000条缓存）</li>
+<li>如果浏览器的缓存里面没有找到，那么浏览器会搜索系统自身的DNS缓存</li>
+<li>如果还没有找到，那么尝试从host文件去找</li>
+<li>如没有找到，就递归去域名服务器去查找，具体情况如下</li>
+</ol>
+<a href="/HuangGuoY.github.io/2020/05/02/http%E6%9C%8D%E5%8A%A1%E8%BF%87%E7%A8%8B/process.png" class="gallery-item"><img src="/HuangGuoY.github.io/2020/05/02/http%E6%9C%8D%E5%8A%A1%E8%BF%87%E7%A8%8B/process.png" class title="DNS域名解析过程"></a>
+
+<h4 id="http三次握手和四次挥手"><a href="#http三次握手和四次挥手" class="headerlink" title="http三次握手和四次挥手"></a>http三次握手和四次挥手</h4></div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script src="/js/lg-thumbnail.min.js"></script><script src="/js/lg-zoom.min.js"></script><script src="/js/lg-autoplay.min.js"></script><script src="/js/lg-fullscreen.min.js"></script><script src="/js/lg-pager.min.js"></script><script src="/js/lg-hash.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2020-05-02</span><i class="fa fa-tag"></i><a class="tag" href="/HuangGuoY.github.io/tags/前端/" title="前端">前端 </a></div></div></div></div><div class="share"><div class="weibo"><a class="fa fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a></div></div><div class="pagination"><ul class="clearfix"><li class="next pagbuttons"><a class="btn" role="navigation" href="/HuangGuoY.github.io/2020/03/18/Vue%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7/" title="Vue高级特性">下一篇</a></li></ul></div><a id="comments"></a><div id="vcomments" style="margin:0 30px;"></div><script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="//cdn.jsdelivr.net/gh/xcss/valine@v1.1.7/dist/Valine.min.js?v=undefined"></script><script>var valine = new Valine({
+  el:'#vcomments',
+  notify:false || false, 
+  verify:false|| false, 
+  app_id:'PPRuXariSpXVa4nqOGCIEOlr-gzGzoHsz',
+  app_key:'i0mUkt1SvpNNgt6DH4E09wgA',
+  placeholder:'请输入内容',
+  path: window.location.pathname,
+  avatar:'mm'
+})</script></div></div></div></div><script src="/HuangGuoY.github.io/js/jquery.js"></script><script src="/HuangGuoY.github.io/js/jquery-migrate-1.2.1.min.js"></script><script src="/HuangGuoY.github.io/js/jquery.appear.js"></script><script src="/HuangGuoY.github.io/js/love.js"></script></body></html>
