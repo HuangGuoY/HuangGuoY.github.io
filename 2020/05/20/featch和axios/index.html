@@ -1,0 +1,54 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="GuoY"><title>fetch和axios · GuoY的博客</title><meta name="description" content=""><meta name="keywords" content="Hexo,HTML,CSS,Vue"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/HuangGuoY.github.io/css/style.css"><link rel="stylesheet" href="/HuangGuoY.github.io/css/blog_basic.css"><link rel="stylesheet" href="/HuangGuoY.github.io/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><meta name="generator" content="Hexo 4.2.0"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/HuangGuoY.github.io/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">GuoY</a></h3></div></div><ul class="social-links"><li><a href="http://github.com/HuangGuoY" target="_blank" rel="noopener"><i class="fa fa-github fa-2x"></i></a></li></ul><div class="footer"><a target="_blank" href="/"><a href="https://github.com/Ben02/hexo-theme-Anatole" target="_blank" rel="noopener">主题： anatole</a></a><div class="by_farbox"><a href="https://hexo.io/zh-cn/" target="_blank">By Hexo&#65281;</a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">首页</a></li><li><a href="/about">关于</a></li><li><a href="/archives">归档</a></li><li><a href="/links">友链</a></li></div><div class="information"><div class="back_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li></div><div class="avatar"><img src="/images/logo.png"></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>fetch和axios</a></h3></div><div class="post-content"><link rel="stylesheet noopener" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" target="_blank"><div class=".article-gallery" <p>fetch是浏览器提供的api，axios是社区封装的的一个组件<p></p>
+<h3 id="fetch"><a href="#fetch" class="headerlink" title="fetch"></a>fetch</h3><p>[]: <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API" target="_blank" rel="noopener">https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API</a>    “Fetch API”</p>
+<p>是一个低层次的api，你可以把它考虑成原生的XHR，所以使用起来并不是那么舒服，需要进行封装。多年来<strong>XMLHttpRequest **一直是web开发者的亲密助手。无论是直接的还是间接的，当我们淡及Ajax技术的时候，通常的意思就是基于</strong>XMLHttpRequest <strong>的Ajax，它是一种能够有效进行页面通信的技术。Ajax的星期是由Google的Gmail所带动的，随后被广泛的应用到众多的Web产品中，可以认为，开发者已经默认将</strong>XMLHttpRequest **作为了当前Web应用于远程资源进行通信的基础。</p>
+<h3 id="fetch的优势："><a href="#fetch的优势：" class="headerlink" title="fetch的优势："></a>fetch的优势：</h3><ol>
+<li>语法简洁，更加语义化</li>
+<li>基于标准Promise实现，支持async/await</li>
+<li>更加低层，提供丰富的API（request，response）</li>
+<li>脱离了XHR，是ES规范里新的实现方式</li>
+</ol>
+<h3 id="fetch存在的问题"><a href="#fetch存在的问题" class="headerlink" title="fetch存在的问题"></a>fetch存在的问题</h3><ol>
+<li><p>fetch是对网络发送请求报错，对400、500都当成成功的请求，服务器返回400、500错误时并不会reject，只有网络错误这些导致请求不能完成时，fetch才会被reject</p>
+</li>
+<li><p>fetch默认不会带cookie，需要添加配置：fetch（url{credentials：’include’})</p>
+</li>
+<li><p>fetch不支持abort，不支持超时控制，使用setTimeout及Premise.reject的实现的超时控制并不能阻止请求，过程继续在后台进行，造成流浪的浪费</p>
+</li>
+<li><p>fetch没有办法远程监测请求的进度，而XHR可以</p>
+</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 一个基本的 fetch 请求设置起来很简单,如下面的代码</span></span><br><span class="line">fetch(<span class="string">'http://example.com/movies.json'</span>)</span><br><span class="line">  .then(<span class="function"><span class="keyword">function</span>(<span class="params">response</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> response.json();</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function"><span class="keyword">function</span>(<span class="params">myJson</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(myJson);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="axios"><a href="#axios" class="headerlink" title="axios"></a>axios</h3><h3 id><a href="#" class="headerlink" title></a></h3><p>[]: <a href="http://www.axios-js.com/zh-cn/docs/" target="_blank" rel="noopener">http://www.axios-js.com/zh-cn/docs/</a>    “axios”</p>
+<p>是一个基于Promise用于浏览器和nodejs的HTTP客户端，本质上也是对原生XHR的封装，只不过他是最新的Promise的实现版本，符合最新的ES规范，它具有以下特征：</p>
+<ol>
+<li>从浏览器中创建XMLHttpRequest</li>
+<li>支持Promise API</li>
+<li>客户端支持防止CSRF</li>
+<li>提供一些并发请求的接口（方便了很多操作）</li>
+<li>从nodejs创建http请求</li>
+<li>拦截请求和响应</li>
+<li>转换请求和响应数据</li>
+<li>取消请求</li>
+<li>自动转换JSON数据</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 举例：为给定 ID 的 user 创建GET请求</span></span><br><span class="line">axios.get(<span class="string">'/user?ID=12345'</span>)</span><br><span class="line">  .then(<span class="function"><span class="keyword">function</span> (<span class="params">response</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(response);</span><br><span class="line">  &#125;)</span><br><span class="line">  .catch(<span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(error);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 上面的请求也可以这样写</span></span><br><span class="line">axios.get(<span class="string">'/user'</span>, &#123;</span><br><span class="line">    params: &#123;</span><br><span class="line">      ID: <span class="number">12345</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function"><span class="keyword">function</span> (<span class="params">response</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(response);</span><br><span class="line">  &#125;)</span><br><span class="line">  .catch(<span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(error);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>总结：axios提供了并发的封装，也没有fetch的各种问题，而且体积也小，当之无愧现在最应该选用的请求方式。</p>
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script src="/js/lg-thumbnail.min.js"></script><script src="/js/lg-zoom.min.js"></script><script src="/js/lg-autoplay.min.js"></script><script src="/js/lg-fullscreen.min.js"></script><script src="/js/lg-pager.min.js"></script><script src="/js/lg-hash.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2020-05-20</span><i class="fa fa-tag"></i><a class="tag" href="/HuangGuoY.github.io/tags/前端/" title="前端">前端 </a></div></div></div></div><div class="share"><div class="weibo"><a class="fa fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a></div></div><div class="pagination"><ul class="clearfix"><li class="next pagbuttons"><a class="btn" role="navigation" href="/HuangGuoY.github.io/2020/05/02/http%E6%9C%8D%E5%8A%A1%E8%BF%87%E7%A8%8B/" title="http服务过程">下一篇</a></li></ul></div><a id="comments"></a><div id="vcomments" style="margin:0 30px;"></div><script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="//cdn.jsdelivr.net/gh/xcss/valine@v1.1.7/dist/Valine.min.js?v=undefined"></script><script>var valine = new Valine({
+  el:'#vcomments',
+  notify:false || false, 
+  verify:false|| false, 
+  app_id:'PPRuXariSpXVa4nqOGCIEOlr-gzGzoHsz',
+  app_key:'i0mUkt1SvpNNgt6DH4E09wgA',
+  placeholder:'请输入内容',
+  path: window.location.pathname,
+  avatar:'mm'
+})</script></div></div></div></div><script src="/HuangGuoY.github.io/js/jquery.js"></script><script src="/HuangGuoY.github.io/js/jquery-migrate-1.2.1.min.js"></script><script src="/HuangGuoY.github.io/js/jquery.appear.js"></script><script src="/HuangGuoY.github.io/js/love.js"></script></body></html>
