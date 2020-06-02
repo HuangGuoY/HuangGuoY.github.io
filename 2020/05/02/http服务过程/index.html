@@ -37,7 +37,8 @@
 <li>当客户机收到确认报文后，还要向服务器发出确认，并且也要给该连接分配缓存和变量。这个报文段的ACK标志位被置为1，序号字段为x+1，确认号字段ack=y+1。该报文段可以携带数据，若不携带数据则不消耗序号。</li>
 </ol>
 <p>成功进行以上三步后，就建立了TCP连接，接下来就可以传送应用层数据。TCP提供全双工通信，因此通信双方的应用进程在任何时间都能发送数据。</p>
-<a href="/HuangGuoY.github.io/2020/05/02/http%E6%9C%8D%E5%8A%A1%E8%BF%87%E7%A8%8B/3%E6%AC%A1%E6%8F%A1%E6%89%8B.png" class="gallery-item"><img src="/HuangGuoY.github.io/2020/05/02/http%E6%9C%8D%E5%8A%A1%E8%BF%87%E7%A8%8B/3%E6%AC%A1%E6%8F%A1%E6%89%8B.png" class title="3次握手"></a>
+<p>图示：</p>
+<div align="center"><a href="/HuangGuoY.github.io/2020/05/02/http%E6%9C%8D%E5%8A%A1%E8%BF%87%E7%A8%8B/3%E6%AC%A1%E6%8F%A1%E6%89%8B.png" class="gallery-item"><img src="/HuangGuoY.github.io/2020/05/02/http%E6%9C%8D%E5%8A%A1%E8%BF%87%E7%A8%8B/3%E6%AC%A1%E6%8F%A1%E6%89%8B.png" class title="3次握手"></a></div>
 
 <p>天下没有不散的筵席，TCP同样如此。参与TCP连接的两个进程中的任何一个都能终止该连接。TCP连接释放的过程被称为四次挥手</p>
 <p><strong>四次挥手</strong>：</p>
@@ -47,7 +48,8 @@
 <li>弱服务器已经没有向客户机发送的数据，就通知TCP释放连接，此时其发出FIN=1的连接释放报文段。</li>
 <li>客户机收到连接释放报文后，必须发出确认。在确认报文段中，ACK字段被置为1，确认号ack=w+1，序号seq=u+1。姿势TCP连接还未释放，必须经过时间等待计时器设置的时间2MSL后，A才进入连接关闭状态。</li>
 </ol>
-</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script src="/js/lg-thumbnail.min.js"></script><script src="/js/lg-zoom.min.js"></script><script src="/js/lg-autoplay.min.js"></script><script src="/js/lg-fullscreen.min.js"></script><script src="/js/lg-pager.min.js"></script><script src="/js/lg-hash.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+<p>图示：</p>
+<div align="center"><a href="/HuangGuoY.github.io/2020/05/02/http%E6%9C%8D%E5%8A%A1%E8%BF%87%E7%A8%8B/4%E6%AC%A1%E6%8C%A5%E6%89%8B.png" class="gallery-item"><img src="/HuangGuoY.github.io/2020/05/02/http%E6%9C%8D%E5%8A%A1%E8%BF%87%E7%A8%8B/4%E6%AC%A1%E6%8C%A5%E6%89%8B.png" class title="4尺挥手"></a></div></div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script src="/js/lg-thumbnail.min.js"></script><script src="/js/lg-zoom.min.js"></script><script src="/js/lg-autoplay.min.js"></script><script src="/js/lg-fullscreen.min.js"></script><script src="/js/lg-pager.min.js"></script><script src="/js/lg-hash.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
         var options = {
             selector: '.gallery-item'
         };
