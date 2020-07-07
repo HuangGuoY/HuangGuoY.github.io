@@ -1,0 +1,90 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="GuoY"><title>Vuex · GuoY的博客</title><meta name="description" content=""><meta name="keywords" content="Hexo,HTML,CSS,Vue"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/HuangGuoY.github.io/css/style.css"><link rel="stylesheet" href="/HuangGuoY.github.io/css/blog_basic.css"><link rel="stylesheet" href="/HuangGuoY.github.io/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><meta name="generator" content="Hexo 4.2.0"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/HuangGuoY.github.io/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">GuoY</a></h3></div></div><ul class="social-links"><li><a href="http://github.com/HuangGuoY" target="_blank" rel="noopener"><i class="fa fa-github fa-2x"></i></a></li></ul><div class="footer"><a target="_blank" href="/"><a href="https://github.com/Ben02/hexo-theme-Anatole" target="_blank" rel="noopener">主题： anatole</a></a><div class="by_farbox"><a href="https://hexo.io/zh-cn/" target="_blank">By Hexo&#65281;</a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">首页</a></li><li><a href="/about">关于</a></li><li><a href="/archives">归档</a></li><li><a href="/links">友链</a></li></div><div class="information"><div class="back_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li></div><div class="avatar"><img src="/images/logo.png"></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>Vuex</a></h3></div><div class="post-content"><link rel="stylesheet noopener" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" target="_blank"><div class=".article-gallery" <h2 id="什么是Vuex"><a href="#什么是Vuex" class="headerlink" title="什么是Vuex"></a>什么是Vuex<p><code>VueX</code> 是一个专为 Vue.js 应用程序开发的<strong>状态管理模式</strong>。</p>
+<p>试想一下，如果在一个项目开发中频繁的使用组件传参的方式来同步<code>data</code>中的值，一旦项目变得很庞大，管理和维护这些值将是相当棘手的工作。为此，<code>Vue</code>为这些被多个组件频繁使用的值提供了一个统一管理的工具——<code>VueX</code>。它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。</p>
+<p> 基本使用,一般在store文件下创建index.js：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"><span class="keyword">import</span> Vuex <span class="keyword">from</span> <span class="string">'vuex'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//挂载Vuex</span></span><br><span class="line">Vue.use(Vuex)</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建VueX对象</span></span><br><span class="line"><span class="keyword">const</span> store = <span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">    state:&#123;</span><br><span class="line">        <span class="comment">//存放的键值对就是所要管理的状态</span></span><br><span class="line">        name:<span class="string">'myVueX'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> store</span><br></pre></td></tr></table></figure>
+
+<p>然后挂载到main.js中:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"><span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">'./App'</span></span><br><span class="line"><span class="keyword">import</span> router <span class="keyword">from</span> <span class="string">'./router'</span></span><br><span class="line"><span class="keyword">import</span> store <span class="keyword">from</span> <span class="string">'./store'</span></span><br><span class="line"></span><br><span class="line">Vue.config.productionTip = <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* eslint-disable no-new */</span></span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#app'</span>,</span><br><span class="line">  router,</span><br><span class="line">  store,  <span class="comment">//store:store 和router一样，将我们创建的Vuex实例挂载到这个vue实例中</span></span><br><span class="line">  render: <span class="function"><span class="params">h</span> =&gt;</span> h(App)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="核心内容"><a href="#核心内容" class="headerlink" title="核心内容"></a><strong>核心内容</strong></h2><p>官方流程图：</p>
+<a href="/HuangGuoY.github.io/2020/04/08/Vuex/vuex.png" class="gallery-item"><img src="/HuangGuoY.github.io/2020/04/08/Vuex/vuex.png" class title="This is Vuex image"></a>
+
+
+
+<p>成员列表：</p>
+<ul>
+<li><p>state 存放状态</p>
+</li>
+<li><p>mutations state成员操作</p>
+</li>
+<li><p>getters 加工state成员给外界</p>
+</li>
+<li><p>actions 异步操作</p>
+</li>
+<li><p>modules 模块化状态管理</p>
+<h4 id="State"><a href="#State" class="headerlink" title="State"></a>State</h4></li>
+</ul>
+<p>state用来在组件中获取状态的值，由于 <code>VueX</code>的状态存储是响应式的，从 store 实例中读取状态最简单的方法就是在computed中返回某个状态：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">computed: &#123;</span><br><span class="line">    count () &#123;</span><br><span class="line">      <span class="keyword">return</span> store.state.count</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>也可以通过在根实例中注册 <code>store</code> 选项，该 store 实例会注入到根组件下的所有子组件中，且子组件能通过 <code>this.$store</code> 访问到。</p>
+<h4 id="Mutation"><a href="#Mutation" class="headerlink" title="Mutation"></a>Mutation</h4><p>更改 <code>VueX</code>的 store 中的状态的唯一方法是提交 mutation。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"><span class="keyword">import</span> Vuex <span class="keyword">from</span> <span class="string">'vuex'</span></span><br><span class="line"></span><br><span class="line">Vue.use(Vuex)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> store = <span class="keyword">new</span> Vuex.store(&#123;</span><br><span class="line">    state:&#123;</span><br><span class="line">        name:<span class="string">'helloVueX'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    mutations:&#123;</span><br><span class="line">        <span class="comment">//es6语法，等同edit:funcion()&#123;...&#125;</span></span><br><span class="line">        edit(state)&#123;</span><br><span class="line">            state.name = <span class="string">'jack'</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> store</span><br></pre></td></tr></table></figure>
+
+
+
+<p>在组件中，我们需要这样去调用这个<code>mutation</code>——例如在App.vue的某个<code>method</code>中:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这样就会触发上面mutations里面的edit方法</span></span><br><span class="line"><span class="keyword">this</span>.$store.commit(<span class="string">'edit'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>当然在实际生产过程中，遇到需要在提交某个<code>mutation</code>时需要携带一些参数给方法使用。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.$store.commit(<span class="string">'edit'</span>,&#123;<span class="attr">age</span>:<span class="number">15</span>,<span class="attr">sex</span>:<span class="string">'男'</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>接收挂载的参数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mutations:&#123;</span><br><span class="line">    edit(state, payload)&#123;</span><br><span class="line">        state.name = <span class="string">'jack'</span></span><br><span class="line">        <span class="built_in">console</span>.log(payload) <span class="comment">// 15或&#123;age:15,sex:'男'&#125;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>增删state中的成员</strong>:</p>
+<p>Vue.set 为某个对象设置成员的值，若不存在则新增</p>
+<p>例如对state对象中添加一个age成员</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vue.set(state,<span class="string">"age"</span>,<span class="number">15</span>)</span><br></pre></td></tr></table></figure>
+
+<p>Vue.delete 删除成员</p>
+<p>将刚刚添加的age成员删除</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vue.delete(state,<span class="string">'age'</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="Action"><a href="#Action" class="headerlink" title="Action"></a>Action</h4><p><code>Action</code> 类似于 <code>mutation</code>，不同在于：</p>
+<ul>
+<li><code>Action</code> 提交的是 <code>mutation</code>，而不是直接变更状态。</li>
+<li><code>Action</code> 可以包含任意异步操作。</li>
+</ul>
+<p><code>mutation</code>必须同步执行这个限制么？<code>Action</code> 就不受约束！我们可以在 action 内部执行<strong>异步</strong>操作：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 我们在1秒中后执行之前的edit方法,由于setTimeout是异步操作，所以需要使用actions</span></span><br><span class="line">actions: &#123;</span><br><span class="line">  aEdit (context, payload) &#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      commit(<span class="string">'edit'</span>, payload)</span><br><span class="line">    &#125;, <span class="number">1000</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>在组件中调用:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.$store.dispatch(<span class="string">'aEdit'</span>,&#123;<span class="attr">age</span>:<span class="number">15</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>由于是异步操作，所以我们可以为我们的异步操作封装为一个<code>Promise</code>对象</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">aEdit(context, payload)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>)=&gt;</span>&#123;</span><br><span class="line">        setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">            context.commit(<span class="string">'edit'</span>,payload)</span><br><span class="line">            resolve()</span><br><span class="line">        &#125;,<span class="number">1000</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script src="/js/lg-thumbnail.min.js"></script><script src="/js/lg-zoom.min.js"></script><script src="/js/lg-autoplay.min.js"></script><script src="/js/lg-fullscreen.min.js"></script><script src="/js/lg-pager.min.js"></script><script src="/js/lg-hash.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2020-04-08</span><i class="fa fa-tag"></i><a class="tag" href="/HuangGuoY.github.io/tags/Vue-js/" title="Vue.js">Vue.js </a></div></div></div></div><div class="share"><div class="weibo"><a class="fa fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a class="btn" role="navigation" href="/HuangGuoY.github.io/2020/04/18/Sass%E7%9A%84%E5%AD%A6%E4%B9%A001/" title="sass的学习01">上一篇</a></li><li class="next pagbuttons"><a class="btn" role="navigation" href="/HuangGuoY.github.io/2020/04/06/VueRouter/" title="Vue-Router">下一篇</a></li></ul></div><a id="comments"></a><div id="vcomments" style="margin:0 30px;"></div><script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="//cdn.jsdelivr.net/gh/xcss/valine@v1.1.7/dist/Valine.min.js?v=undefined"></script><script>var valine = new Valine({
+  el:'#vcomments',
+  notify:false || false, 
+  verify:false|| false, 
+  app_id:'PPRuXariSpXVa4nqOGCIEOlr-gzGzoHsz',
+  app_key:'i0mUkt1SvpNNgt6DH4E09wgA',
+  placeholder:'请输入内容',
+  path: window.location.pathname,
+  avatar:'mm'
+})</script></div></div></div></div><script src="/HuangGuoY.github.io/js/jquery.js"></script><script src="/HuangGuoY.github.io/js/jquery-migrate-1.2.1.min.js"></script><script src="/HuangGuoY.github.io/js/jquery.appear.js"></script><script src="/HuangGuoY.github.io/js/love.js"></script></body></html>
