@@ -1,0 +1,29 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="GuoY"><title>React知识点 · GuoY的博客</title><meta name="description" content=""><meta name="keywords" content="Hexo,HTML,CSS,Vue"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/HuangGuoY.github.io/css/style.css"><link rel="stylesheet" href="/HuangGuoY.github.io/css/blog_basic.css"><link rel="stylesheet" href="/HuangGuoY.github.io/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><meta name="generator" content="Hexo 4.2.0"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/HuangGuoY.github.io/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">GuoY</a></h3></div></div><ul class="social-links"><li><a href="http://github.com/HuangGuoY" target="_blank" rel="noopener"><i class="fa fa-github fa-2x"></i></a></li></ul><div class="footer"><a target="_blank" href="/"><a href="https://github.com/Ben02/hexo-theme-Anatole" target="_blank" rel="noopener">主题： anatole</a></a><div class="by_farbox"><a href="https://hexo.io/zh-cn/" target="_blank">By Hexo&#65281;</a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">首页</a></li><li><a href="/about">关于</a></li><li><a href="/archives">归档</a></li><li><a href="/links">友链</a></li></div><div class="information"><div class="back_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li></div><div class="avatar"><img src="/images/logo.png"></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>React知识点</a></h3></div><div class="post-content"><link rel="stylesheet noopener" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" target="_blank"><div class=".article-gallery" <h2 id="JSX与HTML的区别"><a href="#JSX与HTML的区别" class="headerlink" title="JSX与HTML的区别"></a>JSX与HTML的区别<ol>
+<li><p>所有的属性使用驼峰命名</p>
+<p>如</p>
+<p><code>onclick</code>变成<code>onClick</code></p>
+<p><code>class</code>变成<code>className</code></p>
+</li>
+<li><p>style的属性变成object来定义,带”-“也变成驼峰命名法</p>
+<p>如</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">style=<span class="string">"background-color: red"</span> <span class="comment">// html</span></span><br><span class="line">style=&#123;&#123;<span class="attr">backgroundColor</span>:<span class="string">"red"</span>&#125;&#125; <span class="comment">//jsx</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script src="/js/lg-thumbnail.min.js"></script><script src="/js/lg-zoom.min.js"></script><script src="/js/lg-autoplay.min.js"></script><script src="/js/lg-fullscreen.min.js"></script><script src="/js/lg-pager.min.js"></script><script src="/js/lg-hash.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2020-07-16</span><i class="fa fa-tag"></i><a class="tag" href="/HuangGuoY.github.io/tags/React/" title="React">React </a></div></div></div></div><div class="share"><div class="weibo"><a class="fa fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a></div></div><div class="pagination"><ul class="clearfix"><li class="next pagbuttons"><a class="btn" role="navigation" href="/HuangGuoY.github.io/2020/05/20/featch%E5%92%8Caxios/" title="fetch和axios">下一篇</a></li></ul></div><a id="comments"></a><div id="vcomments" style="margin:0 30px;"></div><script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="//cdn.jsdelivr.net/gh/xcss/valine@v1.1.7/dist/Valine.min.js?v=undefined"></script><script>var valine = new Valine({
+  el:'#vcomments',
+  notify:false || false, 
+  verify:false|| false, 
+  app_id:'PPRuXariSpXVa4nqOGCIEOlr-gzGzoHsz',
+  app_key:'i0mUkt1SvpNNgt6DH4E09wgA',
+  placeholder:'请输入内容',
+  path: window.location.pathname,
+  avatar:'mm'
+})</script></div></div></div></div><script src="/HuangGuoY.github.io/js/jquery.js"></script><script src="/HuangGuoY.github.io/js/jquery-migrate-1.2.1.min.js"></script><script src="/HuangGuoY.github.io/js/jquery.appear.js"></script><script src="/HuangGuoY.github.io/js/love.js"></script></body></html>
