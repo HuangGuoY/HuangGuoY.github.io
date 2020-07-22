@@ -13,6 +13,21 @@
 <p>​        从前往后两两比较相邻元素的值，若为逆序（即A[i-1]&gt;A[i]）,则交换他们，直到系列比较结束。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// js冒泡排序</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bubbleSort</span>(<span class="params">arr</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> len = arr.length;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; len<span class="number">-1</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; len - <span class="number">1</span> - i; j++) &#123;</span><br><span class="line">         <span class="comment">// 相邻元素两两对比，元素交换，大的元素交换到后面</span></span><br><span class="line">        <span class="keyword">if</span> (arr[j] &gt; arr[j + <span class="number">1</span>]) &#123;</span><br><span class="line">            <span class="keyword">var</span> temp = arr[j];</span><br><span class="line">            arr[j] = arr[j+<span class="number">1</span>];</span><br><span class="line">            arr[j+<span class="number">1</span>] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> arr;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// explame</span></span><br><span class="line">myArr = [<span class="number">20</span>,<span class="number">18</span>,<span class="number">27</span>,<span class="number">19</span>,<span class="number">35</span>];</span><br><span class="line">bubbleSort(myArr);</span><br></pre></td></tr></table></figure>
 
+
+
+<h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><p>基本思想：</p>
+<p>​        在待排序表L[1…n]中任取一个元素pivot作为基准，通过一趟排序将待排序表划分为具有如下特点的两部分：</p>
+<a href="/HuangGuoY.github.io/2020/07/20/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%9501/kp.png" class="gallery-item"><img src="/HuangGuoY.github.io/2020/07/20/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%9501/kp.png" class title="image"></a>
+
+<p>Partition</p>
+<p>​        基本思想：</p>
+<p>初始化标记low划分部分第一个元素的位置，high为最后一个元素的位置，然后不断地移动两个标记并交换元素：</p>
+<ol>
+<li>high向前移动找到第一个比pivot小的元素</li>
+<li>low向后移动找到第一个比pivot大的元素</li>
+<li>交换当前两个位置的元素</li>
+<li>继续移动标记，执行上3部过程，知道low等于high为止</li>
+</ol>
 </div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script src="/js/lg-thumbnail.min.js"></script><script src="/js/lg-zoom.min.js"></script><script src="/js/lg-autoplay.min.js"></script><script src="/js/lg-fullscreen.min.js"></script><script src="/js/lg-pager.min.js"></script><script src="/js/lg-hash.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
         var options = {
             selector: '.gallery-item'
