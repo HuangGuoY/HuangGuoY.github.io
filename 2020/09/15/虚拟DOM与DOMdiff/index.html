@@ -1,21 +1,26 @@
 <!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="GuoY"><title>虚拟DOM与DOMdiff · GuoY的博客</title><meta name="description" content=""><meta name="keywords" content="Hexo,HTML,CSS,Vue"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/HuangGuoY.github.io/css/style.css"><link rel="stylesheet" href="/HuangGuoY.github.io/css/blog_basic.css"><link rel="stylesheet" href="/HuangGuoY.github.io/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><meta name="generator" content="Hexo 4.2.0"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/HuangGuoY.github.io/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">GuoY</a></h3></div></div><ul class="social-links"><li><a href="http://github.com/HuangGuoY" target="_blank" rel="noopener"><i class="fa fa-github fa-2x"></i></a></li></ul><div class="footer"><a target="_blank" href="/"><a href="https://github.com/Ben02/hexo-theme-Anatole" target="_blank" rel="noopener">主题： anatole</a></a><div class="by_farbox"><a href="https://hexo.io/zh-cn/" target="_blank">By Hexo&#65281;</a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">首页</a></li><li><a href="/about">关于</a></li><li><a href="/archives">归档</a></li><li><a href="/links">友链</a></li></div><div class="information"><div class="back_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li></div><div class="avatar"><img src="/images/logo.png"></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>虚拟DOM与DOMdiff</a></h3></div><div class="post-content"><link rel="stylesheet noopener" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" target="_blank"><div class=".article-gallery" <p>虚拟DOM与DOMdiff，看似牛X实则简单的前端概念<p></p>
-<h3 id="虚拟DOM"><a href="#虚拟DOM" class="headerlink" title="虚拟DOM"></a>虚拟DOM</h3><h4 id="关于DOM的谣言："><a href="#关于DOM的谣言：" class="headerlink" title="关于DOM的谣言："></a>关于DOM的谣言：</h4><ol>
+<h3 id="虚拟DOM"><a href="#虚拟DOM" class="headerlink" title="虚拟DOM"></a>虚拟DOM</h3><p>关于DOM的谣言：</p>
+<ol>
 <li>DOM操作慢？虚拟DOM快：</li>
 </ol>
-<p>这句话类似于：刘翔矮（对比于姚明）</p>
-<p>DOM操作慢是对比于JS原生API，如数组操作</p>
-<p>任何基于DOM的库（VUE/REACT）都不可能在操作DOM时比DOM快</p>
+<ul>
+<li>这句话类似于：刘翔矮（对比于姚明）</li>
+<li>DOM操作慢是对比于JS原生API，如数组操作</li>
+<li>任何基于DOM的库（VUE/REACT）都不可能在操作DOM时比DOM快</li>
+</ul>
 <ol start="2">
 <li>为什么网上会有这样的谣言：</li>
 </ol>
-<p>因为在默写情况下，虚拟DOM快</p>
-<h4 id="它是什么"><a href="#它是什么" class="headerlink" title="它是什么"></a>它是什么</h4><h4 id="它有什么优点"><a href="#它有什么优点" class="headerlink" title="它有什么优点"></a>它有什么优点</h4><h5 id="减少DOM操作"><a href="#减少DOM操作" class="headerlink" title="减少DOM操作"></a>减少DOM操作</h5><ol>
+<ul>
+<li>因为在默写情况下，虚拟DOM快</li>
+</ul>
+<h4 id="它是什么"><a href="#它是什么" class="headerlink" title="它是什么"></a>它是什么</h4><h4 id="它有什么优点"><a href="#它有什么优点" class="headerlink" title="它有什么优点"></a>它有什么优点</h4><h6 id="减少DOM操作"><a href="#减少DOM操作" class="headerlink" title="减少DOM操作"></a>减少DOM操作</h6><ol>
 <li><p>虚拟DOM可以将多次操作合并为一次操作，比如你添加1000个节点，却是一个接一个操作的</p>
 </li>
 <li><p>虚拟DOM借助DOMdiff可以把多余的操作省掉，比如你添加1000个节点，其实只有10个是新增的</p>
 </li>
 </ol>
-<h5 id="跨平台"><a href="#跨平台" class="headerlink" title="跨平台"></a>跨平台</h5><ol>
+<h6 id="跨平台"><a href="#跨平台" class="headerlink" title="跨平台"></a>跨平台</h6><ol>
 <li>虚拟DOM不仅可以变成DOM，还可以变成小程序、IOS应用、安卓应用，因为虚拟DOM本质只是一个JS对象</li>
 </ol>
 <h4 id="它有什么缺点"><a href="#它有什么缺点" class="headerlink" title="它有什么缺点"></a>它有什么缺点</h4><h3 id="DOM-diff"><a href="#DOM-diff" class="headerlink" title="DOM diff"></a>DOM diff</h3><h4 id="它是什么-1"><a href="#它是什么-1" class="headerlink" title="它是什么"></a>它是什么</h4><h4 id="它有什么优点-1"><a href="#它有什么优点-1" class="headerlink" title="它有什么优点"></a>它有什么优点</h4><h4 id="它有什么缺点-1"><a href="#它有什么缺点-1" class="headerlink" title="它有什么缺点"></a>它有什么缺点</h4></div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script src="/js/lg-thumbnail.min.js"></script><script src="/js/lg-zoom.min.js"></script><script src="/js/lg-autoplay.min.js"></script><script src="/js/lg-fullscreen.min.js"></script><script src="/js/lg-pager.min.js"></script><script src="/js/lg-hash.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
