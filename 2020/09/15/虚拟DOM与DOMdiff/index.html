@@ -25,10 +25,16 @@
 <li><p>Vue(只能在render函数里得到h)</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">h(<span class="string">'div'</span>, &#123;</span><br><span class="line">    class: 'red',</span><br><span class="line">    on: &#123;</span><br><span class="line">        click: <span class="function"><span class="params">()</span>=&gt;</span> &#123;&#125;</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;,[h(<span class="string">'span'</span>,&#123;&#125;,<span class="string">'span1'</span>),h(<span class="string">'span'</span>, &#123;&#125;, <span class="string">'span2'</span>)])</span><br></pre></td></tr></table></figure>
 
-
-
 </li>
 </ol>
+<h4 id="用JSX简化创建虚拟DOM"><a href="#用JSX简化创建虚拟DOM" class="headerlink" title="用JSX简化创建虚拟DOM"></a>用JSX简化创建虚拟DOM</h4><p> React JSX:</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div className= <span class="string">"red"</span> onClick=&#123;fn&#125;&gt;</span><br><span class="line">    &lt;span&gt;span1&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">    &lt;span&gt;span2&lt;/</span>span&gt;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>最后通过babel转为createElement形式</p>
+<p>Vue Template：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>= <span class="string">"red"</span> @click=<span class="string">"fn"</span>&#125;&gt;</span><br><span class="line">    &lt;span&gt;span1&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">    &lt;span&gt;span2&lt;/</span>span&gt;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>通过vue-loader转为h形式</p>
 <h4 id="它有什么优点"><a href="#它有什么优点" class="headerlink" title="它有什么优点"></a>它有什么优点</h4><p>一.减少DOM操作</p>
 <ul>
 <li><p>虚拟DOM可以将多次操作合并为一次操作，比如你添加1000个节点，却是一个接一个操作的</p>
