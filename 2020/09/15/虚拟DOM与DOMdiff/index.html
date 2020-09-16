@@ -41,7 +41,7 @@
 <ul>
 <li><p>虚拟DOM可以将多次操作合并为一次操作，比如你添加1000个节点，却是一个接一个操作的</p>
 </li>
-<li><p>虚拟DOM借助DOMdiff可以把多余的操作省掉，比如你添加1000个节点，其实只有10个是新增的</p>
+<li><p>虚拟DOM借助DOMdiff可以把多余的操作省掉，比如你添加1000个节点，其实只有10个是新增的（借助DOM diff 可以将多余的操作省略）</p>
 </li>
 </ul>
 <p>二.跨平台渲染</p>
@@ -49,7 +49,20 @@
 <li>虚拟DOM不仅可以变成DOM，还可以变成小程序、IOS应用、安卓应用，因为虚拟DOM本质只是一个JS对象</li>
 </ul>
 <h4 id="它有什么缺点"><a href="#它有什么缺点" class="headerlink" title="它有什么缺点"></a>它有什么缺点</h4><p>需要额外创建函数，如createElement或h，但可以通过JSX来简化成XML写法</p>
-<h3 id="DOM-diff"><a href="#DOM-diff" class="headerlink" title="DOM diff"></a>DOM diff</h3><h4 id="它是什么"><a href="#它是什么" class="headerlink" title="它是什么"></a>它是什么</h4><h4 id="它有什么优点-1"><a href="#它有什么优点-1" class="headerlink" title="它有什么优点"></a>它有什么优点</h4><h4 id="它有什么缺点-1"><a href="#它有什么缺点-1" class="headerlink" title="它有什么缺点"></a>它有什么缺点</h4></div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script src="/js/lg-thumbnail.min.js"></script><script src="/js/lg-zoom.min.js"></script><script src="/js/lg-autoplay.min.js"></script><script src="/js/lg-fullscreen.min.js"></script><script src="/js/lg-pager.min.js"></script><script src="/js/lg-hash.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+<h3 id="DOM-diff"><a href="#DOM-diff" class="headerlink" title="DOM diff"></a>DOM diff</h3><h4 id="它是什么"><a href="#它是什么" class="headerlink" title="它是什么"></a>它是什么</h4><p>DOM Diff即虚拟DOM的虚拟算法，就是一个函数，我们称之为patch</p>
+<p>changed = patch（oldVNode，newVNode）</p>
+<p>changed就是要运行的DOM操作，可能长这样</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">	&#123;<span class="attr">type</span>: <span class="string">'INSERT'</span>, <span class="attr">vNode</span>: ...&#125;,</span><br><span class="line">	&#123;<span class="attr">type</span>: <span class="string">'TEXT'</span>, <span class="attr">vNode</span>: ...&#125;,</span><br><span class="line">	&#123;<span class="attr">type</span>: <span class="string">'PROPS'</span>, <span class="attr">propsPatch</span>: [...]&#125;,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<h4 id="DOM-diff-可能的大概逻辑"><a href="#DOM-diff-可能的大概逻辑" class="headerlink" title="DOM diff 可能的大概逻辑"></a>DOM diff 可能的大概逻辑</h4><ul>
+<li>Tree diff<br>√将新l旧两棵树逐层对比，找出哪些节点需要更新<br>√如果节点是组件就看 Componepldiff<br>√如果节点是标签就看Element diff</li>
+<li>Component diff<br>√如果节点是组件，就先看组件类型<br>√类型不同直接替换（删除|旧的）<br>√类型相同则只更新属性<br>√然后深入组件做Tree diff(递归)</li>
+<li>Element diff<br>√如果节点是原生标签，则看标签名<br>√标签名不同直接替换，相同则只更新属性<br>√然后进入标签后代做Tree diff(递归)</li>
+</ul>
+<h4 id="它有什么优点-1"><a href="#它有什么优点-1" class="headerlink" title="它有什么优点"></a>它有什么优点</h4><p>当dom节点更改时，它会对比 oldNode 与 newNode 的区别。从而减少不必要的渲染，会大大减少dom树的节点遍历</p>
+<h4 id="它有什么缺点-1"><a href="#它有什么缺点-1" class="headerlink" title="它有什么缺点"></a>它有什么缺点</h4><p>同级节点对比存在BUG（</p>
+<p>）</p>
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script src="/js/lg-thumbnail.min.js"></script><script src="/js/lg-zoom.min.js"></script><script src="/js/lg-autoplay.min.js"></script><script src="/js/lg-fullscreen.min.js"></script><script src="/js/lg-pager.min.js"></script><script src="/js/lg-hash.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
         var options = {
             selector: '.gallery-item'
         };
