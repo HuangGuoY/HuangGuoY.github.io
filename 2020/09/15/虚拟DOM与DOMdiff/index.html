@@ -60,8 +60,7 @@
 <li>Element diff<br>√如果节点是原生标签，则看标签名<br>√标签名不同直接替换，相同则只更新属性<br>√然后进入标签后代做Tree diff(递归)</li>
 </ul>
 <h4 id="它有什么优点-1"><a href="#它有什么优点-1" class="headerlink" title="它有什么优点"></a>它有什么优点</h4><p>当dom节点更改时，它会对比 oldNode 与 newNode 的区别。从而减少不必要的渲染，会大大减少dom树的节点遍历</p>
-<h4 id="它有什么缺点-1"><a href="#它有什么缺点-1" class="headerlink" title="它有什么缺点"></a>它有什么缺点</h4><p>同级节点对比存在BUG（</p>
-<p>）</p>
+<h4 id="它有什么缺点-1"><a href="#它有什么缺点-1" class="headerlink" title="它有什么缺点"></a>它有什么缺点</h4><p>同级节点对比存在BUG（<a href="zhihu.com/question/61064119/answer/766607894">使用Key可以解决此问题</a>）</p>
 </div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script src="/js/lg-thumbnail.min.js"></script><script src="/js/lg-zoom.min.js"></script><script src="/js/lg-autoplay.min.js"></script><script src="/js/lg-fullscreen.min.js"></script><script src="/js/lg-pager.min.js"></script><script src="/js/lg-hash.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
         var options = {
             selector: '.gallery-item'
