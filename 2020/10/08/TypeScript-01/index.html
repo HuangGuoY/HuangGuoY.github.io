@@ -12,7 +12,22 @@
 <p>注解可以看到对象属于什么类型：</p>
 <div align="center"><a href="/HuangGuoY.github.io/2020/10/08/TypeScript-01/01.png" class="gallery-item"><img src="/HuangGuoY.github.io/2020/10/08/TypeScript-01/01.png" class title="类型注解"></a></div>
 
-<script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script src="/js/lg-thumbnail.min.js"></script><script src="/js/lg-zoom.min.js"></script><script src="/js/lg-autoplay.min.js"></script><script src="/js/lg-fullscreen.min.js"></script><script src="/js/lg-pager.min.js"></script><script src="/js/lg-hash.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+
+
+<p><strong>工作中的使用</strong>：</p>
+<ul>
+<li>如果TS能够自动分析变量类型，我们就什么也不需要做</li>
+<li>如果TS无法分析变量类型，我们就需要使用类型发注释</li>
+</ul>
+<p>不用写类型注释的例子：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> one = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">const</span> two = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">const</span> three = one + two;</span><br></pre></td></tr></table></figure>
+
+<div align="center"><a href="/HuangGuoY.github.io/2020/10/08/TypeScript-01/03.png" class="gallery-item"><img src="/HuangGuoY.github.io/2020/10/08/TypeScript-01/03.png" class title="例子"></a></div>
+
+<p>需要写类型注释的例子：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这样写ts显示参数为any</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getTotal</span>(<span class="params">one , two</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> one + two</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 加上类型注释</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getTotal</span>(<span class="params">one : <span class="built_in">number</span>, two : <span class="built_in">number</span></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> one + two</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<div align="center"><a href="/HuangGuoY.github.io/2020/10/08/TypeScript-01/02.png" class="gallery-item"><img src="/HuangGuoY.github.io/2020/10/08/TypeScript-01/02.png" class title="类型推断"></a></div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script src="/js/lg-thumbnail.min.js"></script><script src="/js/lg-zoom.min.js"></script><script src="/js/lg-autoplay.min.js"></script><script src="/js/lg-fullscreen.min.js"></script><script src="/js/lg-pager.min.js"></script><script src="/js/lg-hash.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
         var options = {
             selector: '.gallery-item'
         };
